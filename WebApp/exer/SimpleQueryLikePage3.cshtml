@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = string.Format("Exercise 2: Database Query 3");
+
+    //reteive the passed data value
+    //to retreive the passed data use .QueryString["label"]
+    //data is returned as a string
+    var cid = Request.QueryString["cid"];
+
+    //good practice
+    //check that you actually retreived data
+    if (string.IsNullOrEmpty(cid))
+    {
+        Response.Redirect("simplequerylikepage2.cshtml");
+    }
+
+    //use data to lookup products
+    var db = Database.Open("chinook");
+    var prodquery = @"SELECT albumid, title, releaseyear, releaselabel
+                        FROM albums 
+                        WHERE artistid = @0
+                        ORDER BY title";
+    var prodinfo = db.Query(prodquery, cid);
+
+    //use data to get category name for display heading
+    //yes: you could have passed the category name with the category id
+    //demonstration of using .QueryValue()
+    var catquery = @"SELECT name
+                    FROM artists
+                    WHERE artistid = @0";
+    var artistname = db.QueryValue(catquery, cid);
+
+    //setup display to use the class WebGrids
+    //assign the display data to the instance when it is created
+    //to alter the number of rows display by the WebGrid instance,
+    //   you need to specify the value when you first create the instance
+    //   syntax attribute --> rowsPerPage:value
+    var gridinstance = new WebGrid(prodinfo, rowsPerPage:5);
+}
+
+
+@section banner {
+    <h1>@Page.Title</h1>
+}
+<div class="offset-1">
+    <h3>Albums for : @artistname</h3>
+    <div class="col-11">
+        @gridinstance.GetHtml(
+            tableStyle:"table table-striped table-bordered table-hover",
+            mode: WebGridPagerModes.All,
+            firstText: "Start",
+            lastText: "End",
+            columns: gridinstance.Columns(
+               gridinstance.Column(columnName: "albumid", header: "ID", canSort: true),
+               gridinstance.Column(columnName: "title", header: "Title",  canSort: true),
+               gridinstance.Column(columnName: "releaseyear", header: "Released", canSort: true),
+                    
+               gridinstance.Column(columnName: "releaselabel", header: "label", canSort: true)
+             
+                   
+              
+                ))
+    </div>
+</div>

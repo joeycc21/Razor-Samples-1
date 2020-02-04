@@ -146,6 +146,7 @@
     <Content Include="excer\MultiRecordQuery %282%29.cshtml" />
     <Content Include="excer\MultiRecordQuery %283%29.cshtml" />
     <Content Include="excer\MultiRecordQuery.cshtml" />
+    <Content Include="exer\SimpleQueryLikePage3.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
