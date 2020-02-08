@@ -162,11 +162,11 @@ else
     <div class="row">
         <div class="col-md-6 text-right">
 
-            <label for="title">Name:</label><br />
-            <label for="Artistid">Supplier:</label><br />
             
-            <label for="ReleaseYear">ReleaseYear:</label><br />
-            <label for="ReleaseLabel">Price:</label><br />
+            
+            
+            
+            
            
           
             
@@ -174,11 +174,15 @@ else
         </div>
         <div class="col-me-6 text-left">
 
+
+            <label for="title">Name:</label>
             <input type="text" value="@title"
                    id="title" name="title" required />
             @* using ValidationMessage("controlname") *@
             @Html.ValidationMessage("title")
             <br />
+
+            <label for="Artistid">Artist:</label>
             <select id="artistlist" name="artistlist">
                 <option value="0">select supplier...</option>
                 @foreach (var item in artistlist)
@@ -199,9 +203,11 @@ else
                 }
             </select>
             <br />
-       
+            <label for="ReleaseYear">ReleaseYear:</label>
             <input type="number" id="ReleaseYear" name="ReleaseYear"
-                   value="@ReleaseYear" min="1950" max= "2100" step="1" /><br />
+                   value="@ReleaseYear" min="1950" max="2100" step="1" /><br />
+
+            <label for="ReleaseLabel">Release Label:</label>
             <input type="text" id="ReleaseLabel" name="ReleaseLabel"
                    value="@ReleaseLabel" /><br />
 
