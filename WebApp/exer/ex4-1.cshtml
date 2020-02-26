@@ -1,0 +1,55 @@
+﻿\@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = string.Format("Razor - {0}", "CRUD - Search");
+
+    var albumsearch = Request.Form["albumsearch"];
+
+    var db = Database.Open("Chinook");
+    var partialsearchstring = "%" + albumsearch + "%";
+
+
+
+    var queryStatement = "SELECT Albumid, Title, Artistid, ReleaseYear, ReleaseLabel FROM Albums WHERE Title like @0";
+                    
+    var queryalbums = db.Query(queryStatement, partialsearchstring);
+
+
+
+
+    //var queryStatement = "SELECT ProductID, ProductName, CategoryID, "
+    //                    + "UnitPrice, UnitsInStock, Discontinued "
+    //                    + "FROM Products "
+    //                    + "WHERE ProductName like @0 "
+    //                    + "ORDER BY ProductName";
+    //var queryalbum = db.Query(queryStatement, partialsearchstring);
+}
+@section banner{<h1>@Page.Title</h1>}
+
+<form id="theForm" action="" method="post">
+    <div class="col-sm-3">
+        <label id="foralbumsearch">Album Name</label><br />
+        <input type="text" name="albumsearch" value="@albumsearch"><br /><br />
+        <button type="submit" class="btn btn-primary" name="Search" id="theSearch">Search</button>
+    </div><br />
+</form>
+<div class="col-sm-8">
+    @if (IsPost)
+    {
+        if (albumsearch.IsEmpty())
+        {
+            <p><strong><span style="color:firebrick">Enter a product name (or partial name).</span></strong></p>
+        }
+        else
+        {
+
+            if (queryalbums.Count() == 0)
+            {
+                <p><strong><span style="color:firebrick">Nothing found for search argument.</span></strong></p>
+            }
+            else
+            {
+                Response.Redirect("ex4-2.cshtml?pid=" + albumsearch);
+            }
+        }
+    }
+</div>

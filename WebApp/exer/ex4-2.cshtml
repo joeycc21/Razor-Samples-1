@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = string.Format("Razor - {0}", "CRUD - WebGrid Display");
+
+    var pid = Request.QueryString["pid"];
+    <p>A search was done with the following partial string for Artistname: @pid</p>
+
+    if (string.IsNullOrEmpty(pid))
+    {
+        Response.Redirect("ex4-1.cshtml");
+    }
+
+    var db = Database.Open("chinook");
+    var partialstring = "%" + pid + "%";
+    var albumquery = @"SELECT albumid, title FROM albums where title like @0";
+
+//SELECT Albumid, Title, Artistid, ReleaseYear, ReleaseLabel FROM Albums WHERE Title like @0";
+
+                
+               
+    var albuminfo = db.Query(albumquery, partialstring);
+
+    var grid = new WebGrid(albuminfo, rowsPerPage: 20);
+}
+@section banner {<h1>@Page.Title</h1>}
+<div class="offset-1">
+    <div class="col-11">
+        @grid.GetHtml("table table-bordered table-striped table-hover",
+        mode: WebGridPagerModes.All,
+        lastText: "Last",
+        firstText: "First",
+        columns: grid.Columns(
+            grid.Column(columnName: "albumid", header: "ID"),
+            grid.Column(columnName: "title"),
+                 
+            
+            
+            grid.Column(header: "", format: @<text><a href="ex4-3.cshtml?pid=@item.albumid">Edit</a></text>)));
+    </div>
+</div>

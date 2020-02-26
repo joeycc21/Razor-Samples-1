@@ -148,6 +148,9 @@
     <Content Include="excer\MultiRecordQuery.cshtml" />
     <Content Include="exer\SimpleQueryLikePage3.cshtml" />
     <Content Include="exer\CRUDPage.cshtml" />
+    <Content Include="exer\ex4-1.cshtml" />
+    <Content Include="exer\ex4-2.cshtml" />
+    <Content Include="exer\ex4-3.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
