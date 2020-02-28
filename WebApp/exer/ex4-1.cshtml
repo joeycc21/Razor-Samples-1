@@ -9,7 +9,7 @@
 
 
 
-    var queryStatement = "SELECT Albumid, Title, Artistid, ReleaseYear, ReleaseLabel FROM Albums WHERE Title like @0";
+    var queryStatement = "SELECT Albumid, Title, Artistid, ReleaseYear, releaselabel FROM Albums WHERE Title like @0";
                     
     var queryalbums = db.Query(queryStatement, partialsearchstring);
 

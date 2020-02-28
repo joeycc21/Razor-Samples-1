@@ -3,7 +3,7 @@
     Page.Title = string.Format("Razor - {0}", "CRUD - WebGrid Display");
 
     var pid = Request.QueryString["pid"];
-    <p>A search was done with the following partial string for Artistname: @pid</p>
+    <p>A search was done with the following partial string for Albumname: @pid</p>
 
     if (string.IsNullOrEmpty(pid))
     {
@@ -35,6 +35,6 @@
                  
             
             
-            grid.Column(header: "", format: @<text><a href="ex4-3.cshtml?pid=@item.albumid">Edit</a></text>)));
+            grid.Column(header: "", format: @<text><a href="CRUDPage - Copy.cshtml?pid=@item.albumid">Edit</a></text>)));
     </div>
 </div>
